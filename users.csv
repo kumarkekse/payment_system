@@ -1,0 +1,4 @@
+name,description,email,status,password,role
+Ashish kumar,this is admin,ak@gmail.com,active,123456,admin
+Ram,this is active merchant,ram@gmail.com,active,123456,merchant
+Shyam,this is inactive merchant,shyam@gmail.com,inactive,123456,merchant

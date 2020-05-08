@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum status: [ :active, :inactive ]
+  enum status: %i(active inactive)
 
   after_create :assign_default_role
 
