@@ -2,6 +2,12 @@ class Transaction < ApplicationRecord
   belongs_to :user
   has_many :related_transactions, foreign_key: :transaction_id, class_name: 'Transaction'
 
+  scope :charge, -> { where(type:'ChargeTransaction') }
+  scope :authorize, -> { where(type:'AuthorizeTransaction') }
+  scope :refund, -> { where(type:'RefundTransaction') }
+  scope :reversal, -> { where(type:'ReversalTransaction') }
+
+
   enum status: %i(approved reversed refunded error)
   before_validation :asign_uuid, on: :create
 
