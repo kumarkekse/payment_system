@@ -5,9 +5,10 @@ class ReversalTransaction < Transaction
 
   after_create :reversal_process
 
-  def reversal_process
-    # set status to refunded for related authorized_transaction
-    authorized_transaction = related_transaction.related_transactions.authorize.approved.last
-    authorized_transaction.update_attribute(:status, 'reversed') if authorized_transaction
-  end
+  private
+    def reversal_process
+      # set status to refunded for related authorized_transaction
+      authorized_transaction = related_transaction.related_transactions.authorize.approved.last
+      authorized_transaction.update_attribute(:status, 'reversed') if authorized_transaction
+    end
 end

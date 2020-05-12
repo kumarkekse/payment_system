@@ -5,12 +5,13 @@ class RefundTransaction < Transaction
 
   after_create :refund_process
 
-  def refund_process
-    # set status to refunded for related charged_transaction
-    charged_transaction = related_transaction.related_transactions.charge.approved.last
-    charged_transaction.update_attribute(:status, 'refunded') if charged_transaction
+  private
+    def refund_process
+      # set status to refunded for related charged_transaction
+      charged_transaction = related_transaction.related_transactions.charge.approved.last
+      charged_transaction.update_attribute(:status, 'refunded') if charged_transaction
 
-    # adjust total_transaction_sum for merchant
-    related_transaction.user.save
-  end
+      # adjust total_transaction_sum for merchant
+      related_transaction.user.save
+    end
 end
