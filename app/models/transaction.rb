@@ -7,7 +7,6 @@ class Transaction < ApplicationRecord
   scope :refund, -> { where(type:'RefundTransaction') }
   scope :reversal, -> { where(type:'ReversalTransaction') }
 
-
   enum status: %i(approved reversed refunded error)
   before_validation :asign_uuid, on: :create
 
