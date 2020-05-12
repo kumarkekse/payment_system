@@ -5,9 +5,13 @@
 * Use docker
 
 run following commands
-  - docker-compose up
-  - docker-compose exec server bash -c "bundle exec rails db:create"
-  - docker-compose exec server bash -c "bundle exec rails db:migrate"
+  - `docker-compose up` or you can use `docker-compose up --build`
+
+  create the database
+  - `docker-compose exec server bash -c "bundle exec rails db:create"`
+
+  to run the migrations
+  - `docker-compose exec server bash -c "bundle exec rails db:migrate"`
 
 Application has a rake task `lib/tasks/import_users.rake` that imports the users from `users.csv` file. To run the rake task execute
 docker-compose exec server bash -c "rake db:import_users"
@@ -19,10 +23,6 @@ It has and API to create transactions only for an active merchant
 
 Steps to check:
 1. Get the token using following command
-
-curl -X POST http://localhost:3000/api/v1/authenticate \
-  -H 'content-type: multipart/form-data' \
-  -F 'email=john.doe@example.com' -F 'password=test123'
 
 curl -X POST \
   'http://localhost:3000/api/v1/authenticate?email=ram@gmail.com&password=123456' \
