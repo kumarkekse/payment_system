@@ -27,7 +27,7 @@ class AuthenticateUser
     end
 
     # No transactions can be submitted unless the merchant is in active state
-    unless user.merchant? && user.active?
+    unless user.is_merchant? && user.active?
       errors.add :message, "User is not an active merchant"
       return nil
     end

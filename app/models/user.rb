@@ -9,15 +9,7 @@ class User < ApplicationRecord
   enum status: %i(active inactive)
 
   after_create :assign_default_role
-  before_save :cal_total_transaction_sum, if: -> { merchant? }
-
-  def admin?
-    has_role? :admin
-  end
-
-  def merchant?
-    has_role? :merchant
-  end
+  before_save :cal_total_transaction_sum, if: -> { is_merchant? }
 
   def cal_total_transaction_sum
     self.total_transaction_sum = transactions.charge.approved.sum(:amount)
